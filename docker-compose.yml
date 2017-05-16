@@ -1,0 +1,33 @@
+version: '2'
+services:
+  jenkins-plugins:
+    image: rancher/jenkins-plugins:v0.1.1
+  jenkins-primary:
+    privileged: true
+    image: ppottie/jenkins-dind:latest
+    entrypoint:
+    - /usr/share/jenkins/rancher/jenkins.sh
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/docker:/var/run/docker
+    - /usr/bin/docker:/usr/bin/docker
+    volumes_from:
+    - jenkins-plugins
+    - jenkins-datavolume
+    ports:
+    - 8081:8080/tcp
+    labels:
+      io.rancher.sidekicks: jenkins-plugins,jenkins-datavolume
+      io.rancher.container.hostname_override: container_name
+  jenkins-datavolume:
+    image: busybox
+    entrypoint:
+    - chown
+    - -R
+    - 1000:1000
+    - /var/jenkins_home
+    volumes:
+    - /var/lib/docker/jenkins:/var/jenkins_home
+    labels:
+      io.rancher.container.start_once: 'true'
+

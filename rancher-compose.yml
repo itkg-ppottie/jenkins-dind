@@ -1,0 +1,62 @@
+version: '2'
+services:
+  jenkins-plugins:
+    metadata:
+      plugins: |-
+        credentials
+        git
+        git-client
+        github
+        github-api
+        github-oauth
+        greenballs
+        junit
+        plain-credentials
+        scm-api
+        ssh-credentials
+        ssh-slaves
+        swarm
+        docker-workflow
+        docker-commons
+    scale: 1
+    start_on_create: true
+  jenkins-primary:
+    metadata:
+      plugins: |-
+        credentials
+        git
+        git-client
+        github
+        github-api
+        github-oauth
+        greenballs
+        junit
+        plain-credentials
+        scm-api
+        ssh-credentials
+        ssh-slaves
+        swarm
+        docker-workflow
+        docker-commons
+    scale: 1
+    start_on_create: true
+  jenkins-datavolume:
+    metadata:
+      plugins: |-
+        credentials
+        git
+        git-client
+        github
+        github-api
+        github-oauth
+        greenballs
+        junit
+        plain-credentials
+        scm-api
+        ssh-credentials
+        ssh-slaves
+        swarm
+        docker-workflow
+        docker-commons
+    scale: 1
+    start_on_create: true
