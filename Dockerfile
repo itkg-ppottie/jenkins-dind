@@ -14,11 +14,11 @@ RUN apt-get -yqq update && \
     apt-key fingerprint 0EBFCD88 && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
     apt-get -yqq update && \
-     apt-get -yqq install docker-ce && usermod -g docker jenkins
+     apt-get -yqq install docker-ce && usermod -g docker jenkins && \
+     rm -rf /var/lib/apt/lists/*
 
 VOLUME /var/lib/docker
 
-RUN rm -rf /var/lib/apt/lists/*
 ENTRYPOINT  usermod -u $(stat -c "%u" /var/jenkins_home) jenkins && /usr/local/bin/jenkins.sh
 
 # drop back to the regular jenkins user - good practice
