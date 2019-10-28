@@ -2,7 +2,7 @@ FROM jenkins/jenkins:alpine
 # if we want to install via apt
 USER root
 
-RUN apk add --no-cache docker bash shadow
+RUN apk add --no-cache docker bash shadow jq
 
 VOLUME /var/lib/docker
 
